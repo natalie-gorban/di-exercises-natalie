@@ -8,19 +8,30 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <style>
         * { box-sizing:border-box;
+            background-color: white;
 
-            background-color: seashell;
+
         }
 
         div.navi > div {
             width: fit-content;
             height: fit-content;
+            background-color: honeydew;
+
         }
 
         div.navi > div.picture > img {
-            width: 150px;
-            height: 150px;
+            width: 250px;
+            height: 200px;
+
+
         }
+
+        div.contacts > img {
+            width: 15px;
+            height: 20px;
+        }
+
         div.navi > div.picture {
             float: right;
             position:relative;
@@ -31,28 +42,37 @@
         }
 
         .navi{
-            border: 1mm ridge rgba(170, 50, 220, .6);
-            padding: 5%;
+            border: 0.3mm ridge grey;
+            padding: 2% 7% 2% 7%;
             height: 250px;
+            width: 70%;
+            background-color: honeydew;
+
         }
 
-        .contacts .profile{
-             display:flex;
+        section {
+           height: 800px;
+           justify-content: center;
 
         }
 
         .box{
             display: flex;
-            border: 1mm ridge rgba(170, 50, 220, .6);
+            border: 0.3mm ridge grey;
             line-height: 2.5;
-            padding-left: 5%;
-            padding-right: 5%;
+            padding: 5mm;
             grid-auto-columns:1fr 1fr;
+            display:flex;
+            width: 70%;
+            background-color: honeydew;
+
+
         }
 
         div > b {
         font-size: large ;
         }
+
 
 
     </style>
@@ -69,31 +89,39 @@
         </div>
     </div>
 </navi>
+
 <body>
+    <section>
     <div class="box">
-        <div class="contacts">
+        <div class="contacts" style="border-right:solid black 1px; padding-left: 5%;">
            <b>contacts</b><br>
 
-           <img src="email">
-           <u>natalie.g.gorban@gmail.com</u><br>
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQckpj3HMzR2MdQ1H28BP6cP_djGx1j-6LGcg&usqp=CAU">
 
-           <img src="telefone">
+           <u>natalie.g.gorban@gmail.com></u><br>
+
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5_bp2HUYZ-_qn8IqeauXMz9FPAKXVSQFrtw&usqp=CAU">
            <u>+972-546391221</u><br>
 
-           <img src="ball">
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO9KjbW_I2E_D2kyXCM_e7Aas60930aJwETA&usqp=CAU">
            <u>www.linkedin/usename</u><br>
 
            <b>education</b>
            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia qui consequatur in ad obcaecati laborum unde culpa, officiis nesciunt accusantium natus, hic commodi corrupti omnis dolores sunt iusto? Magnam, sed.</p>
         </div>
 
-        <div class="profile" >
+        <div class="profile" style="padding-left: 5px;" >
             <b>profile </b>
 
             <b>work experience</b>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos esse, fuga veritatis eveniet voluptas molestias? Nemo explicabo iste, debitis et itaque id facilis, perferendis error laudantium vel obcaecati illo eum.</p>
+            <b>Lorem</b>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, reiciendis! Ab magni cupiditate tempore fuga rem! Rerum corrupti, accusamus eos, soluta a odit repellat iusto facilis consectetur error sunt magnam.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro, reiciendis facilis. Sint error recusandae iste nisi fugit quasi ad fuga assumenda obcaecati excepturi? Impedit repellat nostrum minus provident nam. Velit.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ex, officia minima iusto id molestiae adipisci, totam impedit provident blanditiis maiores voluptates cupiditate? Eaque voluptates ipsum earum corporis fuga rerum. </p>
 
         </div>
     </div>
+</section>
 </body>
 </html>
