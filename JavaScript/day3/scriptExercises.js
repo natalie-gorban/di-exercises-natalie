@@ -5,7 +5,7 @@ let colors = ['orange', 'purple', 'green', 'red'];
 // colors[1] = #2;
 // colors[2] = #3;
 for (let i = 0; i < colors.length; i++) {
-	console.log('My #' + (i+1) + ' choice ' + colors[i]);
+    console.log('My #' + (i+1) + ' choice ' + colors[i]);
 }
 
 
@@ -21,7 +21,7 @@ console.log(people)
 console.log('\nex2.2')
 let index = people.indexOf('James');
 if (index !== -1) {
-	people[index] = 'Jason';
+    people[index] = 'Jason';
 } console.log(people)
 
 
@@ -32,15 +32,15 @@ console.log(people)
 
 console.log('\nex2.4')
 for (let i = 0; i < people.length; i++){
-	console.log(people[i])
+    console.log(people[i])
 }
 
 console.log('\nex2.5')
 for (let i = 0; i < people.length; i++){
-	console.log(people[i])
-	if( people[i] === 'Jason'){
-		break
-	}
+    console.log(people[i])
+    if( people[i] === 'Jason'){
+        break
+    }
 }
 
 console.log('\nex2.6')
@@ -67,10 +67,10 @@ console.log('\nExercise 3')
 let input
 while(true) {
 
-	input = prompt('input a number:','')
-	if(typeof(input) === 'string' && input >= 10) {
-    	break
-	}
+    input = prompt('input a number:','')
+    if(typeof(input) === 'string' && input >= 10) {
+        break
+    }
 }
 
 console.log(input)
@@ -79,11 +79,11 @@ console.log(input)
 console.log('\nExercise 4')
 
 let guestList = {
-	randy: "Germany",
-	karla: "France",
-	wendy: "Japan",
-	norman: "England",
-	sam: "Argentina"
+    randy: "Germany",
+    karla: "France",
+    wendy: "Japan",
+    norman: "England",
+    sam: "Argentina"
   }
 
 let name
@@ -91,38 +91,38 @@ let name
 
 name = prompt('input student name:','')
 if(Object.keys(guestList).indexOf(name) !== -1){
-	console.log(`Hi! I'm ${name}, and I'm from ${guestList[name]}.`)
+    console.log(`Hi! I'm ${name}, and I'm from ${guestList[name]}.`)
 } else {
-	console.log("Hi! I'm a guest")
+    console.log("Hi! I'm a guest")
 }
 
 
 console.log('\nExercise 5')
 
 let family = {
-	Dad: "John",
-	Mommy: "Dana",
-	Daughter: "Karla",
+    Dad: "John",
+    Mommy: "Dana",
+    Daughter: "Karla",
 
 }
 for(let k of Object.keys(family)) {
-	console.log(k)
+    console.log(k)
 }
 for(let v of Object.values(family)) {
-	console.log(v)
+    console.log(v)
 }
 
 
 console.log('\nExercise 6')
 
 let details = {
-	my: 'name',
-	is: 'Rudolf',
-	the: 'raindeer'
+    my: 'name',
+    is: 'Rudolf',
+    the: 'raindeer'
 }
 let output = ''
 for(const [key, value] of Object.entries(details)) {
-	output = `${output} ${key} ${value}`
+    output = `${output} ${key} ${value}`
 }
 console.log(output)
 
@@ -134,7 +134,7 @@ let names = ["Jack", "Philip", "Sarah", "Amanda", "Bernard", "Kyle"]
 let secret = ''
 
 for (let n of names){
-	secret += n[0]
+    secret += n[0]
 }
 secret = secret.split('').sort().join('')
 console.log(secret)
@@ -143,13 +143,13 @@ console.log(secret)
 console.log('\nDaily challenge')
 
 for(let i = 0; i < 6; i++){
-	console.log("* ".repeat(i+1))
+    console.log("* ".repeat(i+1))
 }
 
 for(let i = 0; i < 6; i++){
-	let output = ''
-	for(let j = 0; j <= i; j++){
-		output += '* '
-	}
-	console.log(output)
+    let output = ''
+    for(let j = 0; j <= i; j++){
+        output += '* '
+    }
+    console.log(output)
 }
