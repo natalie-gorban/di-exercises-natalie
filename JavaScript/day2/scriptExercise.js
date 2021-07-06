@@ -69,3 +69,20 @@ if (online === 0) {
   let replaced = sentence.replace(/\bnot\b.*\bbad\b/, "good")
 
   console.log(replaced)
+
+
+//   teacher's decision (Lise)
+
+let sentence = "This dinner is not that very very bad ! You cook well";
+let sentenceArray = sentence.split(" ");
+console.log("sentenceArray", sentenceArray);
+let wordNot = sentenceArray.indexOf("not");
+let wordBad = sentenceArray.indexOf("bad");
+console.log("wordNot", wordNot, "wordBad", wordBad);
+if (wordNot != -1 && wordBad != -1 && wordNot<wordBad){
+	sentenceArray.splice(wordNot, wordBad-wordNot + 1,"good")
+	let newSentence = sentenceArray.join(" ");
+	console.log("the new sentence is : ", newSentence);
+} else {
+	console.log(sentence)
+}
