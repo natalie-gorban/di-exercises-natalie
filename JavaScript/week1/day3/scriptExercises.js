@@ -108,8 +108,14 @@ let family = {
 for(let k of Object.keys(family)) {
     console.log(k)
 }
+for(let k in family) {
+    console.log(k)
+}
 for(let v of Object.values(family)) {
     console.log(v)
+}
+for(let k in family) {
+    console.log(family[k])
 }
 
 
