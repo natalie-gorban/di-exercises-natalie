@@ -18,4 +18,3 @@ function downBottles(){
 
     }
 }
-downBottles(99)
