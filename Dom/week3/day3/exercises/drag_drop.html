@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='drag_drop.css'>
+
+</head>
+<body>
+    <h2>Drag & Drop </h2>
+
+    <div id="box">
+
+   
+    <div id="square2" draggable="true"
+         ondragstart="dragStart(event)">square2</div>
+
+    <div id="square1"
+         ondrop="dragDrop(event)"
+         ondragover="allowDrop(event)"
+         ondragenter="allowEnter(event)"
+         ondragleave="allowLeave(event)">square1</div>
+
+
+
+    <script src='drag_drop.js'></script>
+</body>
+</html>

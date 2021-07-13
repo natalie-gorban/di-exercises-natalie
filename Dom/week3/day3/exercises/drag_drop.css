@@ -1,0 +1,40 @@
+h2 {
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    }
+
+    /*---- BOX ----*/
+    #box {
+    margin: auto;
+    width: 30%;
+    height: 300px;
+    border: 2px solid blue;
+    padding: 2px;
+    }
+
+    #square1, #square2{
+    float: left;
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    }
+
+
+    #square2 {
+    width: 70px;
+    height: 50px;
+    background-color: #e7a466;
+    }
+
+    #square1 {
+    width: 250px;
+    height: 120px;
+    background-color:#a7eeb8 ;
+    }
+
+
+
+    .over {
+      border: 2px dashed #000;
+    }
