@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 1px black solid;
+}
+
+/* #container {
+    display: flex;
+  } */
+/*
+ body{
+    box-sizing: border-box;
+    background-color: lightgray;
+    width: 80%;
+    height: 50%;
+    margin: 100px;
+
+} */
+
+#colorBar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    height: 400px;
+    width: 20%;
+    margin: 100px;
+    float: left;
+    border: 1px black solid;
+}
+
+
+button {
+    grid-column: 1/4;
+    background-color: rgb(189, 181, 181) ;
+    border: none;
+    border-radius: 8px;
+    color:white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
