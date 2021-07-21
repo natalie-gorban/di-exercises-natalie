@@ -32,8 +32,8 @@ let inventory2 = [
 
 
 function sortCarInventoryByYear(carInventory){
-    return carInventory.sort(function (x, y) {
-        return x.car_year - y.car_year;
+    return carInventory.sort(function (a, b) {
+        return a.car_year - b.car_year;
     });
 }
 
