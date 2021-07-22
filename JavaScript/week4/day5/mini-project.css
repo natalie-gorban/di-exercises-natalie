@@ -1,0 +1,75 @@
+body {
+    font-family: sans-serif;
+    background-image: url(https://image.freepik.com/free-vector/circuit-board-seamless-pattern_98292-3920.jpg);
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#searchWrapper {
+    background-color: rgb(51, 99, 204);
+    height: 100px;
+    margin-top: 0%;
+}
+
+ #searchBar {
+    width: 30%;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid #eaeaea;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-left: 250px;
+    margin-bottom: 5px;
+}
+
+ h1 {
+    color: rgb(226, 108, 29);
+    margin-bottom: 30px;
+}
+
+#cardsContainer {
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+
+}
+
+.cardsContainer {
+    list-style-type: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+        'name image'
+        'house image';
+    text-align: centerc;
+    border: darkcyan 2px;
+}
+
+
+.cardsContainer > img {
+    max-height: 100px;
+    grid-area: image;
+}
+
+
+.character > h2 {
+    grid-area: name;
+    margin-bottom: 0px;
+}
+
+.cardsContainer > p {
+    grid-area: house;
+    margin: 0;
+    margin-top: -18px;
+}
+
+.h3 {
+    margin-top: 80px;
+    font-size: x-large;
+}
