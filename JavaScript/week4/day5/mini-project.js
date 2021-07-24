@@ -103,7 +103,7 @@ for (const robot of robots) {
 console.log(robotUsers)
 
 let searchBar = document.getElementById('searchBar')
-document.addEventListener('keyup', logkey)
+searchBar.addEventListener('keyup', logkey)
 function logkey(e) {
     console.log(searchBar.value)
 
