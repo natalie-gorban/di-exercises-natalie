@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Page Title</title>
+    <style>
+        body {
+            margin-left: 30px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        input[type=text], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <form action="html_form.html" method="GET">
+        <div>
+            <label for ="Name">name</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="your name"
+             />
+        </div>
+
+        <div>
+            <label for="comments">comments</label>
+            <textarea
+
+            name="comments"
+            id="comments"
+            rows="4"
+            cols="25">Hello this is a comment
+        </textarea>
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+
+
+<!-- post form will send its data to Headers > Form Data -->
+    <form action="html_form.html" method="POST">
+        <div>
+            <label for ="Username">name</label>
+            <input
+                type="text"
+                name="Username"
+                id="Username"
+                placeholder="your Username"
+             />
+        </div>
+
+        <div>
+            <label for="commentsPost">comments</label>
+            <textarea
+
+            name="commentsPost"
+            id="commentsPost"
+            rows="4"
+            cols="25">Hello this is a comment
+        </textarea>
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+
+
+
+    <script src='html_form.js'></script>
+</body>
+</html>

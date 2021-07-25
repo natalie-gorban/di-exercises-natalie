@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+<style>
+    body {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    input[type=text]:focus {
+
+  border: 3px solid #555;
+}
+</style>
+<body>
+    <form id="myForm" onsubmit="myJson()">
+        <div>
+            <label for="first name"></label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+            />
+        </div>
+        <div>
+        <label for="last name"></label>
+            <input
+                type="text"
+                name="last_name"
+                id="last_name"
+            />
+            </div>
+            <div>
+                <button type="submit">Send</button>
+            </div>
+    </form>
+    <p id="output"></p>
+
+    <script src='daily_challenge.js'></script>
+
+</body>
+</html>
