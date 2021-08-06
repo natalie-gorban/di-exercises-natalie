@@ -85,13 +85,4 @@ full join book_name as n
 on n.language_id = l.id
 full join book_review as r
 on r.book_id = n.id;
-
-Russian	  wooden nose	              Buratino
-Hebrew	  shma israel	              Torah
-English	  no promises	              JavaScript manual
-NULL	  nothing to read	          Empty book
-NULL	  once more nothing to read	  Empty book
-Maori	  NULL	                      NULL
-NULL	  NULL	                      Empty papirus
-Hebrew	  NULL	                      Yad VaShem
 ```

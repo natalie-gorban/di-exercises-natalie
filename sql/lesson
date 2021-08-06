@@ -1,0 +1,181 @@
+CREATE TABLE actors(
+ actor_id SERIAL PRIMARY KEY,
+ first_name
+ last_name
+ date_birth
+ number_oscars
+)
+
+INSERT INTO actors (first_name, last_name, date_birth, number_oscars)
+VALUES ('Matt','Damon','1970-10-08', 5);
+INSERT INTO actors (first_name, last_name, date_birth, number_oscars)
+VALUES('George','Clooney','1961-05-06', 2);
+
+-- INSERT INTO actors (first_name, last_name, birth_date, number_oscars)
+-- VALUES('Emma','Watson','1990-04-15', 3);
+-- INSERT INTO actors (first_name, last_name, birth_date, number_oscars)
+-- VALUES('Emma','Stone','1988-11-06', 2);
+-- INSERT INTO
+--  actors(first_name, last_name, birth_date, number_oscars)
+-- VALUES
+--  ('Brad', 'Pitt', '1963-12-18', 8 ),
+--  ('Steve', 'Carell', '1962-08-16', 2);
+
+-- WHERE
+-- A query can be "qualified" by adding a WHERE clause that specifies which rows are wanted.
+-- The WHERE clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression
+-- is true are returned. The usual Boolean operators (AND, OR, and NOT) are allowed in the qualification.
+-- SELECT first_name, last_name FROM actors WHERE actor_id=1;
+-- SELECT first_name, last_name FROM actors WHERE number_oscars >= 2;
+-- SELECT first_name, last_name, number_oscars FROM actors WHERE date_birth >= '1961-05-05';
+-- We an use AND, also OR
+-- SELECT first_name, last_name FROM actors WHERE number_oscars >= 2 AND first_name = 'Matt';
+-- We can use functions
+-- SELECT first_name, last_name, number_oscars FROM actors WHERE EXTRACT(YEAR from date_birth) = 1961;
+-- SELECT UPPER(first_name) FROM actors WHERE EXTRACT(YEAR from date_birth) = 1961;
+-- SELECT first_name, last_name, number_oscars, EXTRACT(DOW from date_birth) AS day_number FROM actors WHERE number_oscars>2;
+-- SELECT upper(last_name) FROM actors WHERE number_oscars >= 2 AND char_length(first_name) >= 4 ;
+-- We can use the keyword NOT
+-- SELECT upper(last_name), date_birth FROM actors WHERE EXTRACT(YEAR from date_birth) BETWEEN 1955 AND 1965;
+-- SELECT upper(last_name), date_birth FROM actors WHERE EXTRACT(YEAR from date_birth) NOT BETWEEN 1955 AND 1965;
+-- ORDER
+-- SELECT * FROM actors WHERE date_birth >= '1960-01-01' ORDER BY number_oscars DESC;
+-- ORDER and LIMIT to get the best actor
+-- SELECT * FROM actors WHERE date_birth >= '1960-01-01' ORDER BY number_oscars DESC LIMIT 1;
+-- LIKE
+-- SELECT first_name, last_name FROM actors WHERE last_name LIKE '%y'
+
+In the table actors, write the following commands:
+1. Update the first name of Matt Damon to "Maty"
+2. Update the number of oscars of George Clooney to 4, and return the updated record
+3. Delete one actor and return it
+4. Add a column to the table: column email is Unique and can be null. It's varchar(50)
+5. Update all the record so the email adress will be the "actorfirstname.actorlastname@gmail.com"
+
+Lesson of today:
+Update and Alter
+-- : to comment a ligne : crtl+/
+-- : decomment : ctrl+shift+/
+-- SELECT first_name, last_name, number_oscars, age(date_birth) AS age_actor FROM actors WHERE number_oscars>2;
+-- Alter table : Add 2 more columns: salary (integer), nationality (varchar)
+ALTER TABLE actors ADD COLUMN salary integer;
+ALTER TABLE actors ADD COLUMN nationality varchar(20);
+--Update
+-- 1. Salary of 100000 for actors that have more than 2 oscars
+UPDATE actors
+SET salary=100000
+WHERE number_oscars >= 2
+RETURNING *
+-- Salary of 50000 for actors that have less than 2 oscars
+UPDATE actors
+SET salary=50000
+WHERE number_oscars < 2 WHERE 
+RETURNING *
+-- Matt Damon won another oscar, change the table accordingly
+UPDATE actors
+SET number_oscars = number_oscars+1
+WHERE first_name='Matt' AND last_name='Damon'
+RETURNING *
+-- We are in Hollywood, add to all actors a nationality "American"
+UPDATE actors
+SET nationality = 'American'
+RETURNING *
+-- Change the salary proportionatly to their number of oscars, for the 2 first actors (IN clause)
+UPDATE actors
+SET salary = salary*number_oscars
+WHERE actor_id IN (1, 2)
+RETURNING *
+
+
+-- AVG() – return the average value.
+-- COUNT() – return the number of values.
+-- MAX() – return the maximum value.
+-- MIN() – return the minimum value.
+-- SUM() – return the sum of all or distinct values.
+
+-- We often use the aggregate functions with the GROUP BY clause in the SELECT statement. 
+-- In these cases, the GROUP BY clause divides the result set 
+-- into groups of rows and the aggregate functions perform a calculation on each group e.g., 
+-- maximum, minimum, average, etc.
+
+-- Number of lines : 3 actors in the table
+SELECT COUNT(*) FROM actors
+-- -- 2 actors have more than 2 oscars
+SELECT COUNT(*) FROM actors WHERE number_oscars >= 2;
+
+-- Max and Min
+SELECT MAX(number_oscars), Min(number_oscars) FROM actors;
+
+--Average
+SELECT AVG(number_oscars) FROM actors;
+-- Need to Round it
+SELECT ROUND(AVG(number_oscars), 2) FROM actors;
+
+--Sum
+SELECT SUM(number_oscars) FROM actors;
+
+
+--Problem
+-- ERROR:  column "actors.first_name" must appear in the GROUP BY clause or be used in an aggregate function
+-- SELECT first_name, last_name, AVG(number_oscars) FROM actors;
+
+-- Group By
+-- The GROUP BY statement groups rows that have the same values into summary rows,
+-- The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) 
+-- to group the result-set by one or more columns.
+-- The queries that contain the GROUP BY clause are called grouped 
+-- queries and only return a single row for every grouped item.
+
+SELECT nationality, COUNT(*) FROM actors GROUP BY nationality;
+SELECT first_name, nationality, COUNT(*) FROM actors GROUP BY nationality, first_name;
+
+-- Restricting query results using the HAVING clause
+-- It's not always that we will want to perform groupings on all 
+-- the data in a given table. There will be times when we will want 
+-- to restrict our results to a certain given criteria.  
+-- In such cases , we can use the HAVING clause
+-- SQL Having Clause is used to restrict the results returned by the GROUP BY clause.
+-- The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+-- SELECT column_name(s)
+-- FROM table_name
+-- WHERE condition
+-- GROUP BY column_name(s)
+-- HAVING condition
+-- ORDER BY column_name(s);
+
+SELECT nationality, COUNT(*) FROM actors GROUP BY nationality HAVING nationality='American';
+SELECT nationality, COUNT(*) FROM actors GROUP BY nationality HAVING COUNT(*) >= 2;
+
+
+-- Foreign Key
+
+CREATE TABLE movies(
+movie_id SERIAL PRIMARY KEY,
+movie_title VARCHAR (50) NOT NULL,
+movie_story TEXT,
+actor_playing_id INTEGER REFERENCES actors (actor_id)
+);
+
+-- -- SUBQUERY
+
+INSERT INTO movies (movie_title, movie_story,actor_playing_id)
+VALUES('Gravity',
+	   'Gravity is a 2013 science fiction thriller',
+	   (SELECT actor_id FROM actors WHERE first_name='George' AND last_name='Clooney'));
+
+INSERT INTO movies (movie_title, movie_story,actor_playing_id)
+VALUES('Oceans Eleven',
+	   'Danny Ocean, wants to pull off the crime of the century, by ripping off three Casinos at the same time,',
+	   (SELECT actor_id FROM actors WHERE first_name='George' AND last_name='Clooney'));
+
+SELECT actors.actor_id, movies.actor_playing_id, actors.first_name, actors.last_name, movies.movie_title, movies.movie_story 
+FROM actors
+INNER JOIN movies
+ON actors.actor_id = movies.actor_playing_id
+
+SELECT first_name, actors.last_name, movie_title
+FROM actors
+INNER JOIN movies
+ON actor_id = actor_playing_id
+WHERE movie_title ILIKE '%ocean%'

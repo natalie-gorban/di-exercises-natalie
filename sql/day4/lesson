@@ -1,0 +1,80 @@
+-- 1rst possibility 
+
+CREATE OR REPLACE FUNCTION fullname_actor(fn varchar(50), lan varchar(100)) 
+RETURNS VARCHAR(100) AS $fullname$
+DECLARE
+    new_name VARCHAR(100);
+BEGIN
+   SELECT CONCAT(first_name, ' ', last_name) FROM actors WHERE first_name = fn AND last_name=lan INTO new_name;
+   RETURN new_name;
+END;
+$fullname$ 
+LANGUAGE plpgsql;
+
+-- 2nd possibility
+
+CREATE OR REPLACE FUNCTION fullname_actor(fn varchar(50), lan varchar(100)) 
+RETURNS VARCHAR(100) AS $fullname$
+BEGIN
+   RETURN(SELECT CONCAT(first_name, ' ', last_name) FROM actors WHERE first_name = fn AND last_name=lan); 
+END;
+$fullname$ 
+LANGUAGE plpgsql;
+
+SELECT fullname_actor('George', 'Clooney')
+
+SELECT fullname_actor(first_name, last_name) AS fullName FROM actors WHERE actors.first_name = 'George' AND actors.last_name='Clooney';
+
+--Create a function, that returns the number of oscars depending on the first name and last name of the actors
+
+-- return void: return nothing
+
+CREATE FUNCTION add(numToAdd integer, firstN varchar(20), lastN varchar(20)) 
+RETURNS void AS $$
+BEGIN
+   UPDATE actors SET number_oscars = number_oscars + numToAdd WHERE actors.first_name = firstN AND actors.last_name=lastN;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+-- DROP function add
+
+SELECT add(10, 'Matt', 'Damon')
+
+SELECT * FROM actors;
+
+-- --------------------------------------------------------------------
+
+CREATE FUNCTION add_and_return(numToAdd integer, firstN varchar(20), lastN varchar(20)) 
+RETURNS integer AS $$
+DECLARE
+    new_num integer;
+BEGIN
+   UPDATE actors SET number_oscars = number_oscars + numToAdd WHERE actors.first_name = firstN AND actors.last_name=lastN
+   RETURNING number_oscars INTO new_num;
+   RETURN new_num;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+-- DROP function add_and_return
+
+SELECT first_name, last_name, add_and_return(10, first_name, last_name) AS numberOscarsInTenYears FROM actors WHERE actors.first_name = 'George' AND actors.last_name='Clooney';
+
+Exercise
+Add a column salary to the table, with a default 0
+Set the salary of all the actors to 5000
+Create a function that updates the salary of an actor depending on his first and last name. You should pass to the function the argument; salary, first name, last name. The salary of the actor should be salary * number of oscars.
+Returns the new salary from the function
+
+
+Create a shopping List
+Create an HTML page, add a few items and make them clickable.
+The user clicks on the item to add them to his cart.
+Each item can only be added once
+The cart is an array of items, saved in the localstorage. Each item is an object containing the name of the item and the price.
+When the user is done with his shopping, he will click on the “Pay button” (which is actually an anchor) -> redirect him to another HTML page that is linked to another Javascript file.
+This HTML page displays all the items and total price and a “Submit payment” Button
+When the button is clicked -> add a successful message on the page, and clear all the items from the local storage.
+
+
