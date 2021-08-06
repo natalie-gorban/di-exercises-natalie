@@ -34,6 +34,25 @@
     tr:nth-child(even) {
     background-color: #dddddd;
     }
+
+    .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+    visibility: visible;
+    }
+
 </style>
 
 
@@ -155,8 +174,8 @@
                 <th>Remove Button</th>
             </tr>`
         for(const i of todoIndices){
-            tasksHTML += `<tr>
-                <td>${todoMap[i]['name']}</td>
+            tasksHTML += `<tr class="tooltip">
+                <td>${todoMap[i]['name']}<span class="tooltiptext">${todoMap[i]['description']}</span></td>
                 <td>${todoMap[i]['start_date']}</td>
                 <td>${todoMap[i]['end_date']}</td>
                 <td><input id="status-${i}" type="checkbox" name="status-${i}" ${todoMap[i]['status'] ? "checked" : ""} onchange="updateStatus(${i})"></td>
