@@ -14,10 +14,26 @@
         height: 40px;
     }
 
-   fieldset {
-       margin-bottom: 20px;
+    fieldset {
+        margin-bottom: 20px;
 
-   }
+    }
+
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
 </style>
 
 
@@ -33,7 +49,7 @@
         <br>
         <label for="end_date">End Date:</label><input id="end_date" type="date">
         <br>
-        <label for="status">Status(done or not):</label><input id="status" type="checkbox">
+        <label for="status">Status(done or not):</label><input id="status" type="checkbox" name="status">
         <br><br>
         <input id="reset" type="reset">
         <button type='button' id='btnInsert'>Insert Data</button>
@@ -44,6 +60,12 @@
 <fieldset>
     <legend>Last Added ToDo Task</legend>
     <div id='output'></div>
+</fieldset>
+
+<fieldset>
+    <legend>ToDo Tasks</legend>
+    <button type="button" id='btnGetTasks'>Get Tasks</button>
+    <div id='tasks'></div>
 </fieldset>
 <script type='text/javascript'>
     const nameInput = document.getElementById('name')
@@ -57,8 +79,10 @@
     const outputDiv = document.getElementById('output')
 
     btnInsert.onclick = function () {
-        console.log(`input parameters:\n  name: ${nameInput.value}\n  description: ${descriptionInput.value}\n  start date: ${startDateInput.value}\n  end date: ${endDateInput.value}\n  status: ${statusInput.value}`)
-        let dateDiff = Date.parse(endDateInput.value) - Date.parse(startDateInput.value)
+        console.log(`input parameters:\n  name: ${nameInput.value}\n  description: ${descriptionInput.value}\n  start date: ${startDateInput.value}\n  end date: ${endDateInput.value}\n  status: ${statusInput.checked}`)
+        let startDateUnix = Date.parse(startDateInput.value)
+        let endDateUnix = Date.parse(endDateInput.value)
+        let dateDiff = endDateUnix - startDateUnix
         console.log(`date diff: ${dateDiff}`)
         if (dateDiff <= 0){
             alert("end date cannot be earlier than start date")
@@ -66,19 +90,80 @@
             alert("name or description or start date or end date cannot be empty")
         } else {
             let now = new Date().getTime()
-            let todoObject = localStorage.getItem('todo')
-            let todoMap = todoObject == null ? {} : JSON.parse(todoObject)
+            let todoMap = getToDoMap()
             todoMap[now] = {
                 'name': nameInput.value,
                 'description': descriptionInput.value,
                 'start_date': startDateInput.value,
                 'end_date': endDateInput.value,
-                'status': statusInput.value
+                'status': statusInput.checked
             }
-            outputDiv.innerHTML = `<p>name: ${nameInput.value}</p><p>description: ${descriptionInput.value}</p><p>start_date: ${startDateInput.value}</p><p>end_date: ${endDateInput.value}</p><p>status: ${statusInput.value}</p>`
+            outputDiv.innerHTML = `<p>name: ${nameInput.value}</p><p>description: ${descriptionInput.value}</p><p>start_date: ${startDateInput.value}</p><p>end_date: ${endDateInput.value}</p><p>status: ${statusInput.checked}</p>`
             console.log(todoMap)
-            localStorage.setItem('todo', JSON.stringify(todoMap))
+            setToDoMap(todoMap)
         }
+    }
+
+    const tasksDiv = document.getElementById('tasks')
+    const btnGetTasks = document.getElementById('btnGetTasks')
+
+    btnGetTasks.onclick = renderToDoList
+
+    function updateStatus(taskId){
+        let statusDiv = document.getElementById(`status-${taskId}`)
+        let todoMap = getToDoMap()
+        todoMap[taskId]['status'] = statusDiv.checked
+        setToDoMap(todoMap)
+        alert(`to update task ${taskId}`)
+    }
+
+    function removeTask(taskId){
+        let todoMap = getToDoMap()
+        delete todoMap[taskId]
+        setToDoMap(todoMap)
+        renderToDoList()
+        alert(`to remove task ${taskId}`)
+    }
+
+    function getToDoMap(){
+        let todoObject = localStorage.getItem('todo')
+        let todoMap = todoObject == null ? {} : JSON.parse(todoObject)
+        return todoMap
+    }
+
+    function setToDoMap(todoMap){
+        localStorage.setItem('todo', JSON.stringify(todoMap))
+    }
+
+    function renderToDoList(){
+        let todoMap = getToDoMap()
+        let todoIndices = Object.keys(todoMap)
+        todoIndices.sort((a,b) => {
+            let diff = Date.parse(todoMap[a]["start_date"]) - Date.parse(todoMap[b]["start_date"])
+            if(diff < 0) return -1
+            else if(diff > 0) return 1
+            else return 0
+        })
+        console.log(todoIndices)
+
+        let tasksHTML = `<table>
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Remove Button</th>
+            </tr>`
+        for(const i of todoIndices){
+            tasksHTML += `<tr>
+                <td>${todoMap[i]['name']}</td>
+                <td>${todoMap[i]['start_date']}</td>
+                <td>${todoMap[i]['end_date']}</td>
+                <td><input id="status-${i}" type="checkbox" name="status-${i}" ${todoMap[i]['status'] ? "checked" : ""} onchange="updateStatus(${i})"></td>
+                <td><input type="button" onclick="removeTask(${i})" value='Remove me'></td>
+            </tr>`
+        }
+        tasksDiv.innerHTML = tasksHTML + '</table>'
     }
 
 </script>
