@@ -42,19 +42,17 @@
 
 
 <fieldset>
-    <legend>Local Storage</legend>
+    <legend>Last Added ToDo Task</legend>
     <div id='output'></div>
 </fieldset>
 <script type='text/javascript'>
-    const insertForm = document.getElementById('insert_form')
-
     const nameInput = document.getElementById('name')
     const descriptionInput = document.getElementById('description')
     const startDateInput = document.getElementById('start_date')
     const endDateInput = document.getElementById('end_date')
     const statusInput = document.getElementById('status')
 
-    const btnInsetr = document.getElementById('btnInsetr')
+    const btnInsert = document.getElementById('btnInsert')
 
     const outputDiv = document.getElementById('output')
 
@@ -69,7 +67,7 @@
         } else {
             let now = new Date().getTime()
             let todoObject = localStorage.getItem('todo')
-            let todoMap = todoObject == null ? {} : todoObject
+            let todoMap = todoObject == null ? {} : JSON.parse(todoObject)
             todoMap[now] = {
                 'name': nameInput.value,
                 'description': descriptionInput.value,
@@ -77,21 +75,10 @@
                 'end_date': endDateInput.value,
                 'status': statusInput.value
             }
-            console.dir(todoMap)
+            outputDiv.innerHTML = `<p>name: ${nameInput.value}</p><p>description: ${descriptionInput.value}</p><p>start_date: ${startDateInput.value}</p><p>end_date: ${endDateInput.value}</p><p>status: ${statusInput.value}</p>`
+            console.log(todoMap)
             localStorage.setItem('todo', JSON.stringify(todoMap))
         }
-        // if (key && value) {
-        //     localStorage.setItem(key, value)
-        //     location.reload
-        // }
-
-        // for (let i=0; i< localStorage.length; i++) {
-        //     const key = localStorage.key(i)
-        //     const value = localStorage.getItem(key)
-
-        //     outputDiv.innerHTML += `${key}: ${value} <br>`
-        // }
-        insertForm.reset()
     }
 
 </script>
