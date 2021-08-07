@@ -16,44 +16,53 @@
 
     fieldset {
         margin-bottom: 20px;
-
     }
+
 /* Table */
     table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
     }
 
     td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    }
-
-    tr:nth-child(even) {
-    background-color: #dddddd;
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
     }
 /* Table */
 
 
 /* Hint on hover */
     .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
 
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
     }
 
     .tooltip:hover .tooltiptext {
-    visibility: visible;
+        visibility: visible;
+    }
+
+/* Task colors */
+    .complete {
+        background-color: lightgreen;
+    }
+
+    .out-of-time {
+        background-color: darkorange;
+    }
+
+    .uncomplete {
+        background-color: crimson;
     }
 
 </style>
@@ -84,7 +93,7 @@
     <div id='output'></div>
 </fieldset>
 
-<label for="today">Today is:</label><input id="today" type="date">
+<label for="today">Today is:</label><input id="today" type="date" onchange="renderToDoList()">
 
 <fieldset>
     <legend>ToDo Tasks</legend>
@@ -138,7 +147,7 @@
         let todoMap = getToDoMap()
         todoMap[taskId]['status'] = statusDiv.checked
         setToDoMap(todoMap)
-        alert(`to update task ${taskId}`)
+        renderToDoList()
     }
 
     function removeTask(taskId){
@@ -146,7 +155,6 @@
         delete todoMap[taskId]
         setToDoMap(todoMap)
         renderToDoList()
-        alert(`to remove task ${taskId}`)
     }
 
     function getToDoMap(){
@@ -182,7 +190,11 @@
             </tr>`
         for(const i of todoIndices){
             let tillDone = Math.floor((Date.parse(todoMap[i]['end_date']) - todayUnix)/1000/60/60/24)
-            tasksHTML += `<tr class="tooltip ">
+            let colorClass;
+            if(todoMap[i]['status']) colorClass = 'complete'
+            else if(!todoMap[i]['status'] && tillDone > 0) colorClass = 'uncomplete'
+            else colorClass = 'out-of-time'
+            tasksHTML += `<tr class="tooltip ${colorClass}">
                 <td>${todoMap[i]['name']}<span class="tooltiptext">${todoMap[i]['description']}</span></td>
                 <td>${todoMap[i]['start_date']}</td>
                 <td>${tillDone > 0? tillDone : 'Out of time'}</td>
