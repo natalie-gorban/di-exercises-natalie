@@ -1,0 +1,19 @@
+{
+  "name": "lesson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lesson.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "keywords": [],
+  "author": "Natalie",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1"
+    },
+    "devDependencies": {
+    "nodemon": "^2.0.12"
+    }
+}
