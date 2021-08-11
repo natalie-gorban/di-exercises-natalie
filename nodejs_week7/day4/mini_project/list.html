@@ -11,22 +11,13 @@
 <body>
 <h2>My Shopping List</h2>
 <form action='http://localhost:3000/' method='GET'>
-    <input id='item' type='text' id='item' placehlder='Item' value=''>
-    <input id='item' type='number' id='amount' placeholder='Amount' value=''>
+    <input id='item' type='text' name='item' placehlder='Item' value=''>
+    <input id='item' type='number' name='amount' placeholder='Amount' value=''>
     <input type='submit' id='btnSubmit'>
 </form>
 
 <div id='list'></div>
 
 
-<script>
-function sumbitList() {
-    let items = document.getElementById('item').value
-    let amount = document.getElementById('amount').value
-    console.log('item', items)
-    console.log('amount', amount)
-
-}
-</script>
 </body>
 </html>
