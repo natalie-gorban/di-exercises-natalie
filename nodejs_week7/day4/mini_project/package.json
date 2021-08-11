@@ -1,0 +1,19 @@
+{
+  "name": "my_shoping_list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exspress.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "exp": "^57.2.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "nodemon": "^2.0.12"
+  }
+}
