@@ -13,7 +13,8 @@ app.get('/', (req, res) => {
     fs.readFile(`${__dirname}/list.html`, 'utf-8', (err, data) => {
         if (err) throw err
         res.writeHead(200, {'Content-Type':'text/html'})
-        res.end(data)
+        updated_data = data.replace(/<div id='list'><\/div>/, `<div id="list">${JSON.stringify(req.query)}</div>`)
+        res.end(updated_data)
     })
 
     }).listen(3000)
