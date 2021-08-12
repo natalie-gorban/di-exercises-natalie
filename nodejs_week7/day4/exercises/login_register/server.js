@@ -1,0 +1,86 @@
+const exp = require('express');
+const bp = require('body-parser')
+const fs = require('fs')
+const path = require('path')
+
+const app = exp();
+
+
+app.use('/', exp.static(__dirname +'/public'));
+
+const path_storage = `${__dirname}/register.json`
+app.get('/', (req, res) => {
+    // req.params.item + req.params.amount
+    console.log(req.query)
+    fs.readFile(`${__dirname}/public/register.html`, 'utf-8', (err, content) => {
+        if (err) throw err
+
+        fs.readFile(path_storage, 'utf-8', (err, data) => {
+            let registrationData
+            if (err || data == "") registrationData = {}
+            else registrationData = JSON.parse(data)
+
+            let message
+            if(registrationData.hasOwnProperty(req.query.username)){
+                message = 'Username already exists'
+
+            }else{
+                registrationData[req.query.username]=req.query
+                // saving new registration
+                let listToLocalStorage = JSON.stringify(registrationData)
+                fs.writeFile(path_storage, listToLocalStorage, (e) => {
+                    if (e) throw e
+                })
+                message = 'Hello Your account is now created!'
+
+            }
+            res.writeHead(200, {'Content-Type':'text/html'})
+            updated_content = content.replace(/<div id='register'><\/div>/, `<div id="register">${message}</div>`)
+
+            res.end(updated_content)
+        })
+    })
+
+})
+
+
+
+const path_storage = `${__dirname}/login.json`
+app.get('/', (req, res) => {
+    // req.params.item + req.params.amount
+
+    console.log(req.query)
+    // console.log(req.query.username + ":" + req.query.pasword)
+    fs.readFile(`${__dirname}/public/login.html`, 'utf-8', (err, content) => {
+        if (err) throw err
+
+        fs.readFile(path_storage, 'utf-8', (err, data) => {
+            let loginData
+            if (err || data == "") loginData = {}
+            else loginData = JSON.parse(data)
+
+            let message
+            if(loginData.hasOwnProperty(req.query.username)){
+                message = `Hi ${username} welcome back again`
+
+            }else{
+                loginData[req.query.username]=req.query
+                // saving new registration
+                let listToLocalStorage = JSON.stringify(loginData)
+                fs.writeFile(path_storage, listToLocalStorage, (e) => {
+                    if (e) throw e
+                })
+                message = 'Username is not registered'
+
+            }
+            res.writeHead(200, {'Content-Type':'text/html'})
+            updated_content = content.replace(/<div id='login'><\/div>/, `<div id="login">${message}</div>`)
+
+            res.end(updated_content)
+        })
+    })
+
+})
+
+
+app.listen(3000)
