@@ -4,7 +4,7 @@ const Register = () => {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
-  fetch('http://localhost:3000/',{
+  fetch('http://localhost:3000/register',{
     method:'POST',
     headers: {
       'Content-type':'application/json'
@@ -23,7 +23,7 @@ const login = () => {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
 
-  fetch('http://localhost:3000/',{
+  fetch('http://localhost:3000/login',{
     method:'POST',
     headers: {
       'Content-type':'application/json'

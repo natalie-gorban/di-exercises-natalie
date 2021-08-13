@@ -8,8 +8,12 @@ const app = exp();
 
 app.use('/', exp.static(__dirname +'/public'));
 
-const path_storage = `${__dirname}/register.json`
 app.get('/', (req, res) => {
+    res.redirect('/login')
+})
+
+const path_storage = `${__dirname}/register.json`
+app.get('/register', (req, res) => {
     // req.params.item + req.params.amount
     console.log(req.query)
     fs.readFile(`${__dirname}/public/register.html`, 'utf-8', (err, content) => {
@@ -44,9 +48,7 @@ app.get('/', (req, res) => {
 })
 
 
-
-const path_storage = `${__dirname}/login.json`
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     // req.params.item + req.params.amount
 
     console.log(req.query)
@@ -60,8 +62,8 @@ app.get('/', (req, res) => {
             else loginData = JSON.parse(data)
 
             let message
-            if(loginData.hasOwnProperty(req.query.username)){
-                message = `Hi ${username} welcome back again`
+            if(req.query.hasOwnProperty('username') && loginData.hasOwnProperty(req.query.username)){
+                message = `Hi ${req.query.username} welcome back again`
 
             }else{
                 loginData[req.query.username]=req.query
