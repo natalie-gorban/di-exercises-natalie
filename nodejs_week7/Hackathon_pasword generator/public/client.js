@@ -8,7 +8,7 @@ const register = () => {
     headers: {
       'Content-type':'application/json'
     },
-    body: JSON.stringify({username})
+    body: JSON.stringify({"username": userName, "email": email, "password": password})
   })
   .then(res => res.json())
   .then(data => {
@@ -21,7 +21,7 @@ const register = () => {
 const login = () => {
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
-
+  console.log(username + " " + password)
   fetch('http://localhost:3000/login',{
     method:'POST',
     headers: {

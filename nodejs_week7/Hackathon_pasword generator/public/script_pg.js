@@ -1,12 +1,12 @@
+let resultEl = document.getElementById('result')
+let lengthEl = document.getElementById('length')
+let uppercaseEl = document.getElementById('uppercase')
+let lowercaseEl = document.getElementById('lowercase')
+let numbersEl = document.getElementById('numbers')
+let symbolsEl = document.getElementById('symbols')
+let generateEl = document.getElementById('generate')
+let clipboardEl = document.getElementById('clipboard')
 const  passwordGenerator = () => {
-    let resultEl = document.getElementById('result')
-    let lengthEl = document.getElementById('length')
-    let uppercaseEl = document.getElementById('uppercase')
-    let lowercaseEl = document.getElementById('lowercase')
-    let numbersEl = document.getElementById('numbers')
-    let symbolsEl = document.getElementById('symbols')
-    let generateEl = document.getElementById('generate')
-    let clipboardEl = document.getElementById('clipboard')
 
     fetch('http://localhost:3000/passwordGenerator', {
         method: 'POST',

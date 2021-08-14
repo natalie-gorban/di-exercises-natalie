@@ -13,10 +13,14 @@ app.use('/', exp.static(__dirname +'/public'));
 // })
 
 const path_storage = `${__dirname}/register.json`
+const registerHtml = `${__dirname}/public/register.html`
 app.get('/register', (req, res) => {
+    res.sendFile(registerHtml)
+})
+app.post('/register', (req, res) => {
     // req.params.item + req.params.amount
-    console.log(req.query)
-    fs.readFile(`${__dirname}/public/index_register.html`, 'utf-8', (err, content) => {
+    console.log(`login: ${JSON.stringify(req.query)}`)
+    fs.readFile(registerHtml, 'utf-8', (err, content) => {
         if (err) throw err
 
         fs.readFile(path_storage, 'utf-8', (err, data) => {
@@ -47,13 +51,16 @@ app.get('/register', (req, res) => {
 
 })
 
-
+const loginHtml = `${__dirname}/public/login.html`
 app.get('/login', (req, res) => {
+    res.sendFile(loginHtml)
+})
+app.post('/login', (req, res) => {
     // req.params.item + req.params.amount
 
-    console.log(req.query)
+    console.log(`login: ${JSON.stringify(req.query)}`)
     // console.log(req.query.username + ":" + req.query.pasword)
-    fs.readFile(`${__dirname}/public/index_login.html`, 'utf-8', (err, content) => {
+    fs.readFile(loginHtml, 'utf-8', (err, content) => {
         if (err) throw err
 
         fs.readFile(path_storage, 'utf-8', (err, data) => {
@@ -72,11 +79,11 @@ app.get('/login', (req, res) => {
                 fs.writeFile(path_storage, listToLocalStorage, (e) => {
                     if (e) throw e
                 })
-                message = 'Username is not registered'
+                message = `Username is not registered, provided: ${JSON.stringify(req.query)}`
 
             }
             res.writeHead(200, {'Content-Type':'text/html'})
-            updated_content = content.replace(/<div id='login'><\/div>/, `<div id="login">${message}</div>`)
+            updated_content = content.replace(/<div id='message'><\/div>/, `<div id='message'>${message}</div>`)
 
             res.end(updated_content)
         })
@@ -91,7 +98,7 @@ app.get('/passwordGenerator', (req, res) => {
 
     console.log(req.query)
     // console.log(req.query.username + ":" + req.query.pasword)
-    fs.readFile(`${__dirname}/public/index_pg.html`, 'utf-8', (err, content) => {
+    fs.readFile(`${__dirname}/public/passwordGenerator.html`, 'utf-8', (err, content) => {
         if (err) throw err
 
         fs.readFile(path_storage, 'utf-8', (err, data) => {
@@ -123,6 +130,10 @@ app.get('/passwordGenerator', (req, res) => {
 })
 
 
+app.get('/logout', (req, res) => {
+    console.log("TBD")
+    res.redirect('/login')
+})
 
 
 app.listen(3000)
