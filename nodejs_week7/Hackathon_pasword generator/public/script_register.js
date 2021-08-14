@@ -1,4 +1,4 @@
-const Register = () => {
+const register = () => {
   let userName = document.getElementById('userName').value;
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;

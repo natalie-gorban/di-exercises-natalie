@@ -8,9 +8,9 @@ const app = exp();
 
 app.use('/', exp.static(__dirname +'/public'));
 
-app.get('/', (req, res) => {
-    res.redirect('/login')
-})
+// app.get('/', (req, res) => {
+//     res.redirect('/login')
+// })
 
 const path_storage = `${__dirname}/register.json`
 app.get('/register', (req, res) => {
@@ -83,6 +83,46 @@ app.get('/login', (req, res) => {
     })
 
 })
+
+
+
+app.get('/passwordGenerator', (req, res) => {
+    // req.params.item + req.params.amount
+
+    console.log(req.query)
+    // console.log(req.query.username + ":" + req.query.pasword)
+    fs.readFile(`${__dirname}/public/index_pg.html`, 'utf-8', (err, content) => {
+        if (err) throw err
+
+        fs.readFile(path_storage, 'utf-8', (err, data) => {
+            let generatorData
+            if (err || data == "") generatorData = {}
+            else generatorData = JSON.parse(data)
+
+            let message
+            if(req.query.hasOwnProperty('password') && generatorData.hasOwnProperty(req.query.password)){
+                // message = `Hi ${req.query.username} welcome back again`
+
+            }else{
+                generatorData[req.query.password]=req.query
+                // saving new registration
+                let listToLocalStorage = JSON.stringify(generatorData)
+                fs.writeFile(path_storage, listToLocalStorage, (e) => {
+                    if (e) throw e
+                })
+                // message = 'Username is not registered'
+
+            }
+            res.writeHead(200, {'Content-Type':'text/html'})
+            updated_content = content.replace(/<div id='login'><\/div>/, `<div id="login">${message}</div>`)
+
+            res.end(updated_content)
+        })
+    })
+
+})
+
+
 
 
 app.listen(3000)
