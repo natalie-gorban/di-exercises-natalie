@@ -43,7 +43,7 @@ box-sizing: border-box;
 }
 
 body {
-    background-color:rgb(238, 182, 176);
+    background-color:white;
     color:azure;
     font-family: 'Muli';
     display: flex ;
@@ -62,15 +62,15 @@ h2 {
 }
 
 .container {
-    background-color: rgb(45, 169, 173);
+    background-color:dodgerblue;
     box-shadow: 0px 2px 10px black ;
     padding: 20px;
-    width: 350px;
+    width: 400px;
     max-width: 100%;
 }
 
 .result-container {
-    background-color:rgb(167, 238, 238);
+    background-color:white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -102,7 +102,7 @@ h2 {
 
 .btn {
     border: none;
-    background-color: rgb(209, 125, 125);
+    background-color:mediumblue;
     color: cornsilk;
     font-size: 18px;
     padding: 8px 12px;
@@ -120,4 +120,5 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin: 15px 0;
+
 }

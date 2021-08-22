@@ -1,10 +1,9 @@
-const exp = require('express');
-const bp = require('body-parser')
+const exp = require('express')
+// const bp = require('body-parser')
 const fs = require('fs')
 const path = require('path')
 
-const app = exp();
-
+const app = exp()
 
 app.use('/', exp.static(__dirname +'/public'));
 
@@ -12,25 +11,24 @@ app.use('/', exp.static(__dirname +'/public'));
 //     res.redirect('/login')
 // })
 
-const path_storage = `${__dirname}/register.json`
-const registerHtml = `${__dirname}/public/register.html`
+const pathStorage = path.join(__dirname, 'register.json')
+const registerHtml = path.join(__dirname, 'public/register.html')
 app.get('/register', (req, res) => {
-    res.sendFile(registerHtml)
+  res.sendFile(registerHtml)
 })
 app.post('/register', (req, res) => {
-    // req.params.item + req.params.amount
-    console.log(`login: ${JSON.stringify(req.query)}`)
-    fs.readFile(registerHtml, 'utf-8', (err, content) => {
-        if (err) throw err
+  // req.params.item + req.params.amount
+  console.log(`login: ${JSON.stringify(req.query)}`)
+  fs.readFile(registerHtml, 'utf-8', (err, content) => {
+    if (err) throw err
+    fs.readFile(pathStorage, 'utf-8', (err, data) => {
+      let registrationData
+      if (err || data === '') registrationData = {}
+      else registrationData = JSON.parse(data)
 
-        fs.readFile(path_storage, 'utf-8', (err, data) => {
-            let registrationData
-            if (err || data == "") registrationData = {}
-            else registrationData = JSON.parse(data)
-
-            let message
-            if(registrationData.hasOwnProperty(req.query.username)){
-                message = 'Username already exists'
+      let message
+      if (registrationData.hasOwnProperty(req.query.username)){
+      message = 'Username already exists'
 
             }else{
                 registrationData[req.query.username]=req.query
@@ -63,7 +61,7 @@ app.post('/login', (req, res) => {
     fs.readFile(loginHtml, 'utf-8', (err, content) => {
         if (err) throw err
 
-        fs.readFile(path_storage, 'utf-8', (err, data) => {
+        fs.readFile(pathStorage, 'utf-8', (err, data) => {
             let loginData
             if (err || data == "") loginData = {}
             else loginData = JSON.parse(data)

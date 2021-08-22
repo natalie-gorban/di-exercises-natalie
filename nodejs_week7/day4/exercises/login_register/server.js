@@ -1,15 +1,12 @@
 const exp = require('express');
-const bp = require('body-parser')
 const fs = require('fs')
-const path = require('path')
 
 const app = exp();
-
 
 app.use('/', exp.static(__dirname +'/public'));
 
 app.get('/', (req, res) => {
-    res.redirect('/login')
+  res.redirect('/login')
 })
 
 const path_storage = `${__dirname}/register.json`
