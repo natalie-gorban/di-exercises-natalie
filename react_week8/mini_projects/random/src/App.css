@@ -1,0 +1,24 @@
+.showMe {
+  font-style:italic;
+  border: 1px solid black;
+  height: 300px;
+  width: 600px;
+  padding: 20px;
+  display: block;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.showMe h4 {
+  padding-left: 450px;
+  padding-top:30px ;
+}
+
+.showMe button {
+  display: block;
+  margin-top: 80px;
+  margin-left: 470px;
+  padding: 10px;
+  color:white;
+  background-color: black;
+}
