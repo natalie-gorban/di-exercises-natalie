@@ -18,7 +18,7 @@ app.get('/register', (req, res) => {
 })
 app.post('/register', (req, res) => {
   // req.params.item + req.params.amount
-  console.log(`login: ${JSON.stringify(req.query)}`)
+  console.log(`/register: ${JSON.stringify(req.query)}`)
   fs.readFile(registerHtml, 'utf-8', (err, content) => {
     if (err) throw err
     fs.readFile(pathStorage, 'utf-8', (err, data) => {
@@ -34,7 +34,7 @@ app.post('/register', (req, res) => {
                 registrationData[req.query.username]=req.query
                 // saving new registration
                 let listToLocalStorage = JSON.stringify(registrationData)
-                fs.writeFile(path_storage, listToLocalStorage, (e) => {
+                fs.writeFile(pathStorage, listToLocalStorage, (e) => {
                     if (e) throw e
                 })
                 message = 'Hello Your account is now created!'
@@ -51,6 +51,7 @@ app.post('/register', (req, res) => {
 
 const loginHtml = `${__dirname}/public/login.html`
 app.get('/login', (req, res) => {
+    console.log(`/login: ${JSON.stringify(req.query)}`)
     res.sendFile(loginHtml)
 })
 app.post('/login', (req, res) => {
@@ -74,7 +75,7 @@ app.post('/login', (req, res) => {
                 loginData[req.query.username]=req.query
                 // saving new registration
                 let listToLocalStorage = JSON.stringify(loginData)
-                fs.writeFile(path_storage, listToLocalStorage, (e) => {
+                fs.writeFile(pathStorage, listToLocalStorage, (e) => {
                     if (e) throw e
                 })
                 message = `Username is not registered, provided: ${JSON.stringify(req.query)}`
@@ -94,12 +95,12 @@ app.post('/login', (req, res) => {
 app.get('/passwordGenerator', (req, res) => {
     // req.params.item + req.params.amount
 
-    console.log(req.query)
+    console.log(`/passwordGenerator: ${JSON.stringify(req.query)}`)
     // console.log(req.query.username + ":" + req.query.pasword)
     fs.readFile(`${__dirname}/public/passwordGenerator.html`, 'utf-8', (err, content) => {
         if (err) throw err
 
-        fs.readFile(path_storage, 'utf-8', (err, data) => {
+        fs.readFile(pathStorage, 'utf-8', (err, data) => {
             let generatorData
             if (err || data == "") generatorData = {}
             else generatorData = JSON.parse(data)
@@ -112,7 +113,7 @@ app.get('/passwordGenerator', (req, res) => {
                 generatorData[req.query.password]=req.query
                 // saving new registration
                 let listToLocalStorage = JSON.stringify(generatorData)
-                fs.writeFile(path_storage, listToLocalStorage, (e) => {
+                fs.writeFile(pathStorage, listToLocalStorage, (e) => {
                     if (e) throw e
                 })
                 // message = 'Username is not registered'
@@ -129,7 +130,7 @@ app.get('/passwordGenerator', (req, res) => {
 
 
 app.get('/logout', (req, res) => {
-    console.log("TBD")
+    console.log("/logout: TBD")
     res.redirect('/login')
 })
 

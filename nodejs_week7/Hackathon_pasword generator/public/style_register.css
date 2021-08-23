@@ -1,6 +1,11 @@
 body {font-family: Arial, Helvetica, sans-serif;
     margin: 100px;
-
+    background-color:rgba(240, 176, 134, 0.767);
+    height: 100%;
+    margin: 10px;
+    width: 80%;
+    margin-top: 100px;
+    font-family: 'Muli';
 }
 * {box-sizing: border-box;}
 
@@ -41,13 +46,13 @@ body {font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 15px;
 }
 
-.icon {
+  .icon {
     padding: 10px;
     background: dodgerblue;
     color: white;
     min-width: 50px;
     text-align: center;
-}
+  }
 
 .input-field {
     width: 100%;
