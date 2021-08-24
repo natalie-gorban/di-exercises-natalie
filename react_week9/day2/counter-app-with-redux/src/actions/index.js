@@ -1,15 +1,15 @@
-const increaseCount = () => {
+const INCREASE_COUNT = () => {
   return {
     type: "INCREASE_COUNT",
     payload: 1
   }
 }
 
-const decreaseCount = () => {
+const DECREASE_COUNT = () => {
   return {
     type: "DECREASE_COUNT",
     payload: -1
   }
 }
 
-export {increaseCount, decreaseCount}
+export {INCREASE_COUNT, DECREASE_COUNT}
