@@ -1,12 +1,11 @@
 const exp = require('express')
+// const bp = require('body-parser')
 const fs = require('fs')
 const path = require('path')
 
 const app = exp()
 
 app.use('/', exp.static(__dirname +'/public'));
-app.use(exp.json())
-app.use(exp.urlencoded({ extended: false }))
 
 // app.get('/', (req, res) => {
 //     res.redirect('/login')
@@ -15,13 +14,11 @@ app.use(exp.urlencoded({ extended: false }))
 const pathStorage = path.join(__dirname, 'register.json')
 const registerHtml = path.join(__dirname, 'public/register.html')
 app.get('/register', (req, res) => {
-  console.log(`GET /register: ${JSON.stringify(req.body)}`)
-
   res.sendFile(registerHtml)
 })
 app.post('/register', (req, res) => {
   // req.params.item + req.params.amount
-  console.log(`POST /register: ${JSON.stringify(req.body)}`)
+  console.log(`/register: ${JSON.stringify(req.query)}`)
   fs.readFile(registerHtml, 'utf-8', (err, content) => {
     if (err) throw err
     fs.readFile(pathStorage, 'utf-8', (err, data) => {
@@ -30,11 +27,11 @@ app.post('/register', (req, res) => {
       else registrationData = JSON.parse(data)
 
       let message
-      if (registrationData.hasOwnProperty(req.body.username)){
+      if (registrationData.hasOwnProperty(req.query.username)){
       message = 'Username already exists'
 
             }else{
-                registrationData[req.body.username]=req.body
+                registrationData[req.query.username]=req.query
                 // saving new registration
                 let listToLocalStorage = JSON.stringify(registrationData)
                 fs.writeFile(pathStorage, listToLocalStorage, (e) => {
@@ -44,9 +41,7 @@ app.post('/register', (req, res) => {
 
             }
             res.writeHead(200, {'Content-Type':'text/html'})
-            updated_content = content.replace(/<div id='message'><\/div>/, `<div id="message">${message}</div>`)
-
-            console.log(`message to user: ${message}`)
+            updated_content = content.replace(/<div id='register'><\/div>/, `<div id="register">${message}</div>`)
 
             res.end(updated_content)
         })
@@ -56,13 +51,14 @@ app.post('/register', (req, res) => {
 
 const loginHtml = `${__dirname}/public/login.html`
 app.get('/login', (req, res) => {
-    console.log(`GET /login: ${JSON.stringify(req.body)}`)
+    console.log(`/login: ${JSON.stringify(req.query)}`)
     res.sendFile(loginHtml)
 })
 app.post('/login', (req, res) => {
     // req.params.item + req.params.amount
 
-    console.log(`POST /login: ${JSON.stringify(req.body)}`)
+    console.log(`login: ${JSON.stringify(req.query)}`)
+    // console.log(req.query.username + ":" + req.query.pasword)
     fs.readFile(loginHtml, 'utf-8', (err, content) => {
         if (err) throw err
 
@@ -72,23 +68,21 @@ app.post('/login', (req, res) => {
             else loginData = JSON.parse(data)
 
             let message
-            if(loginData.hasOwnProperty(req.body.username)){
-                message = `Hi ${req.body.username} welcome back again`
+            if(req.query.hasOwnProperty('username') && loginData.hasOwnProperty(req.query.username)){
+                message = `Hi ${req.query.username} welcome back again`
 
             }else{
-                loginData[req.body.username]=req.body
+                loginData[req.query.username]=req.query
                 // saving new registration
                 let listToLocalStorage = JSON.stringify(loginData)
                 fs.writeFile(pathStorage, listToLocalStorage, (e) => {
                     if (e) throw e
                 })
-                message = `Username is not registered, provided: ${JSON.stringify(req.body)}`
+                message = `Username is not registered, provided: ${JSON.stringify(req.query)}`
 
             }
             res.writeHead(200, {'Content-Type':'text/html'})
-            let updated_content = content.replace(/<div id='message'><\/div>/, `<div id='message'>${message}</div>`)
-
-            console.log(`message to user: ${message}`)
+            updated_content = content.replace(/<div id='message'><\/div>/, `<div id='message'>${message}</div>`)
 
             res.end(updated_content)
         })
@@ -99,8 +93,10 @@ app.post('/login', (req, res) => {
 
 
 app.get('/passwordGenerator', (req, res) => {
+    // req.params.item + req.params.amount
 
-    console.log(`GET /passwordGenerator: ${JSON.stringify(req.body)}`)
+    console.log(`/passwordGenerator: ${JSON.stringify(req.query)}`)
+    // console.log(req.query.username + ":" + req.query.pasword)
     fs.readFile(`${__dirname}/public/passwordGenerator.html`, 'utf-8', (err, content) => {
         if (err) throw err
 
@@ -110,22 +106,23 @@ app.get('/passwordGenerator', (req, res) => {
             else generatorData = JSON.parse(data)
 
             let message
-            if(generatorData.hasOwnProperty(req.body.password)){
-                message = `password is in generator data`
+            if(req.query.hasOwnProperty('password') && generatorData.hasOwnProperty(req.query.password)){
+                // message = `Hi ${req.query.username} welcome back again`
 
             }else{
-                generatorData[req.body.password]=req.body
+                generatorData[req.query.password]=req.query
                 // saving new registration
                 let listToLocalStorage = JSON.stringify(generatorData)
                 fs.writeFile(pathStorage, listToLocalStorage, (e) => {
                     if (e) throw e
                 })
-                message = 'password added to generator data'
+                // message = 'Username is not registered'
 
             }
             res.writeHead(200, {'Content-Type':'text/html'})
+            updated_content = content.replace(/<div id='login'><\/div>/, `<div id="login">${message}</div>`)
 
-            res.end(content)
+            res.end(updated_content)
         })
     })
 
@@ -133,7 +130,7 @@ app.get('/passwordGenerator', (req, res) => {
 
 
 app.get('/logout', (req, res) => {
-    console.log("GET /logout: TBD")
+    console.log("/logout: TBD")
     res.redirect('/login')
 })
 
