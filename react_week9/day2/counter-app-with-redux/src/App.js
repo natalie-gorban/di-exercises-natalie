@@ -1,26 +1,24 @@
 import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import {reducer, store} from './reducers'
+import {store} from './reducers'
+import {decreaseCount, increaseCount} from './actions'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. {store.getState().count}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Count: {store.getState().count}
+          </p>
+          <input type='button' value="increase" onClick={() => store.dispatch(increaseCount())}/>
+          <input type='button' value="decrease" onClick={() => store.dispatch(decreaseCount())}/>
+        </header>
+      </div>
+    )
+  }
 }
 
 export default App;
