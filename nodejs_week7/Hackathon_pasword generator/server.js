@@ -37,8 +37,8 @@ app.post('/register', (req, res) => {
                     if (e) throw e
                 })
                 message = 'Hello Your account is now created!'
-                res.redirect('/')
-                return
+                // res.redirect('/')
+                // return
             }
             res.writeHead(200, {'Content-Type':'text/html'})
             updated_content = content.replace(/<div id='message'><\/div>/, `<div id="message">${message}</div>`)
@@ -72,8 +72,8 @@ app.post('/login', (req, res) => {
             if(loginData.hasOwnProperty(req.body.username)){
                 if (loginData[req.body.username].password == req.body.password) {
                     message = `Hi ${req.body.username} welcome back again`
-                    res.redirect('/')
-                    return
+                    // res.redirect('/')
+                    // return
                 } else {
                     message = `The password for ${req.body.username} is incorrect`
                 }
