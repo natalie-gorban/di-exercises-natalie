@@ -7,7 +7,7 @@ class Navbar extends React.Component {
     return (
       <nav>
         <div class='nav-wrapper'>
-          <a href='#' class='brand-logo center-center-'>My Blog</a>
+          <a href='/' class='brand-logo center-center-'>My Blog</a>
           <ul id='nav-mobile' class='right hide-on-med-and-down'>
             {/* <li><NavLink to='/'>Home</NavLink></li> */}
             <li><NavLink activeStyle={{backgroundColor:"#353d46"}} className={style.link} to='/'>Home</NavLink></li>
