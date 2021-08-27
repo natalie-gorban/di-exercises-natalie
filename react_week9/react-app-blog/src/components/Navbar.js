@@ -1,11 +1,10 @@
 import React from 'react'
-import {BrowserRouter as Router, Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import style from '../style.css'
 
 class Navbar extends React.Component {
   render() {
     return (
-      <Router>
       <nav>
         <div class='nav-wrapper'>
           <a href='#' class='brand-logo center-center-'>My Blog</a>
@@ -18,7 +17,6 @@ class Navbar extends React.Component {
           </ul>
         </div>
       </nav>
-    </Router>
     )
   }
 }

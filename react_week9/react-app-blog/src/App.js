@@ -3,16 +3,21 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import Contacts from './components/Contacts'
+import {BrowserRouter as Router, Route } from "react-router-dom";
 
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-      <Home/>
-      <Contacts/>
-      <About/>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar/>
+        <div className='content'>
+          <Route exact path='/' component={Home}/>
+          <Route path='/contacts' component={Contacts}/>
+          <Route path='/about' component={About}/>
+        </div>
+      </div>
+    </Router>
   );
 }
 
