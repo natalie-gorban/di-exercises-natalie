@@ -1,17 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { store } from '../store'
 class Post extends React.Component {
   render () {
-    console.log('props:', this.props)
-    const post = this.props.post? (
+    const posts = store.getState().posts
+    const post = posts.find(element => element.id == this.props.match.params.post_id)
+    const output = post ? (
       <div className='app-list'>
         <img className='logo' src='/images/blog.png'/>
         <div className='blogText'>
-          <a href='/article{this.props.post_id}'>
-            <span className='article-title'>I am aricle#1</span>
-          </a>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <Link className='article-title' to={`/article${post.id}`}>I am aricle#{post.id}</Link>
+          <p>{post.title}</p>
         </div>
       </div>
     ) : (
@@ -19,10 +19,15 @@ class Post extends React.Component {
         <p>Loading post</p>
       </div>
     );
-    return (
-      <div>{post}</div>
-    )
+    return output
 
   }
 }
-export default Post;
+
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts
+  }
+}
+
+export default connect(mapStateToProps)(Post);

@@ -29,6 +29,7 @@ class Home extends React.Component {
             </div>
           )
         }
+        <Link to={"/article4"}>Non existing link</Link>
       </div>
     )
   }
