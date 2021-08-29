@@ -26,7 +26,7 @@ export const handleLoaded = (val) => {
   }
 }
 
-export const fetchRobots = () => (dispatch) => {
+export const fetchRobots = () => async (dispatch) => {
   fetch('https://jsonplaceholder.typicode.com/users')
     .then(res => res.json())
     .then(data => {

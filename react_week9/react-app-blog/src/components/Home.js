@@ -17,7 +17,7 @@ class Home extends React.Component {
                 <div className='app-list' key={post.id}>
                   <img className='logo' src='/images/blog.png'/>
                   <div className='blogText'>
-                    <Link to={`/article${post.id}`}>I am aricle#{post.id}</Link>
+                    <Link to={`/article${post.id}`} id={post.id}>I am aricle#{post.id}</Link>
                     <p>{post.title}</p>
                   </div>
                 </div>
