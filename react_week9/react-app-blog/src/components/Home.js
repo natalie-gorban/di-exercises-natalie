@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from './Post'
+import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import { store } from '../store'
 // import BlogLogo from '../public/images/blog.png'
@@ -11,14 +11,12 @@ class Home extends React.Component {
       <div className='container'>
         <h3 className='app-header'>Home</h3>
         {
-          store.getState().map((post) => {
+          store.getState().posts.map((post) => {
             return (
-              <div className='app-list'>
+              <div className='app-list' key={post.id}>
                 <img className='logo' src='/images/blog.png'/>
                 <div className='blogText'>
-                  <a href={`/article${post.id}`}>
-                    <span className='article-title'>I am aricle#{post.id}</span>
-                  </a>
+                  <Link to={`/article${post.id}`}>I am aricle#{post.id}</Link>
                   <p>{post.title}</p>
                 </div>
               </div>
@@ -31,7 +29,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  post: state.post
+  posts: state.posts
 })
 
 export default connect(mapStateToProps)(Home);
