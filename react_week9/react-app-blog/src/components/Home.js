@@ -11,17 +11,23 @@ class Home extends React.Component {
       <div className='container'>
         <h3 className='app-header'>Home</h3>
         {
-          store.getState().posts.map((post) => {
-            return (
-              <div className='app-list' key={post.id}>
-                <img className='logo' src='/images/blog.png'/>
-                <div className='blogText'>
-                  <Link to={`/article${post.id}`}>I am aricle#{post.id}</Link>
-                  <p>{post.title}</p>
+          store.getState().posts.length > 0 ? (
+            store.getState().posts.map((post) => {
+              return (
+                <div className='app-list' key={post.id}>
+                  <img className='logo' src='/images/blog.png'/>
+                  <div className='blogText'>
+                    <Link to={`/article${post.id}`}>I am aricle#{post.id}</Link>
+                    <p>{post.title}</p>
+                  </div>
                 </div>
-              </div>
-            )
-          })
+              )
+            })
+          ) : (
+            <div className='app-list'>
+              <p>No post to show</p>
+            </div>
+          )
         }
       </div>
     )
