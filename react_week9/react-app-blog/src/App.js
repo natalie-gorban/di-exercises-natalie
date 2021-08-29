@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import Contacts from './components/Contacts'
+import Post from './components/Post'
 import {BrowserRouter as Router, Route } from "react-router-dom";
 
 
@@ -15,6 +16,7 @@ function App() {
           <Route exact path='/' component={Home}/>
           <Route path='/contacts' component={Contacts}/>
           <Route path='/about' component={About}/>
+          <Route path='/:post_id' component={Post}/>
         </div>
       </div>
     </Router>
